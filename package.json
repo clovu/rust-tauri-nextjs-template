@@ -32,6 +32,7 @@
     "eslint-plugin-react": "^7.34.1",
     "globals": "^15.3.0",
     "internal-ip": "7.0.0",
+    "lint-staged": "^15.2.2",
     "pnpm": "^9.1.2",
     "postcss": "^8.4.38",
     "pre-commit": "^1.2.2",

@@ -41,3 +41,9 @@ repos:
         language: rust
         files: \.rs$
         pass_filenames: false
+
+      - id: lint-staged
+        name: Front-end lint staged
+        description: Lint front-end code to be commit
+        entry: bash -c 'pnpm lint-staged -v'
+        language: node
