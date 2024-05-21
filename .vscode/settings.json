@@ -1,0 +1,26 @@
+{
+  // not use prettier if any
+  "prettier.enable": false,
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "never",
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "never"
+  },
+  "errorLens.enabledDiagnosticLevels": [
+    "warning",
+    "error"
+  ],
+  "errorLens.excludeBySource": [
+    "cSpell",
+    "eslint"
+  ],
+  "[rust]": {
+    "editor.rulers": [
+      100
+    ],
+  },
+  // close inner type hints
+  "rust-analyzer.inlayHints.typeHints.enable": false,
+}
