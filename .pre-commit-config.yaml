@@ -47,3 +47,9 @@ repos:
         description: Lint front-end code to be commit
         entry: bash -c 'pnpm lint-staged -v'
         language: node
+
+      - id: Test client
+        name: client-test
+        entry: bash -c 'pnpm test -- --run'
+        language: node
+        files: \.ts$|\.js$

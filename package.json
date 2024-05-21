@@ -10,7 +10,8 @@
     "lint": "eslint",
     "fix": "eslint --fix",
     "tauri": "tauri",
-    "prepare": "pre-commit install"
+    "prepare": "pre-commit install",
+    "test": "vitest"
   },
   "dependencies": {
     "@tauri-apps/api": "2.0.0-beta.11",
@@ -38,6 +39,7 @@
     "pre-commit": "^1.2.2",
     "tailwindcss": "^3.4.3",
     "typescript": "^5.4.5",
-    "typescript-eslint": "^7.10.0"
+    "typescript-eslint": "^7.10.0",
+    "vitest": "^1.6.0"
   }
 }
