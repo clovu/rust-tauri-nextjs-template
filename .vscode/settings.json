@@ -16,6 +16,8 @@
     "cSpell",
     "eslint"
   ],
+  // it will cause the correct use of tailwindcss(@tailwind) to appear a warning. so ignore it
+  "css.lint.unknownAtRules": "ignore",
   "[rust]": {
     "editor.rulers": [
       100
