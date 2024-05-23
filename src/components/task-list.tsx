@@ -11,5 +11,5 @@ export function TaskList() {
 
   return dataSource.map(task =>
     <Task name={task.name} status={task.status} id={task.id} key={task.id} />,
-  )
+  ).reverse()
 }

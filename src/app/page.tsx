@@ -27,8 +27,6 @@ export default function Home() {
 
   async function loadTaskList() {
     const tasks = await invoke<Task[]>("get_tasks")
-    console.log(tasks)
-
     dispatch(setTaskList(tasks))
   }
 
