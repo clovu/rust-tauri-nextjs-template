@@ -14,7 +14,7 @@ const taskSlice = createSlice({
   reducers: {
     addTask(state, action: PayloadAction<Omit<Task, "id">>) {
       const { name, status } = action.payload
-      state.list.push({ name, status, id: state.list.length++ })
+      state.list.push({ name, status, id: state.list.length + 1 })
     },
     setTaskList(state, action: PayloadAction<Task[]>) {
       state.list = action.payload
