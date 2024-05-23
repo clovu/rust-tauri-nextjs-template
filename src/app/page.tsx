@@ -11,11 +11,16 @@ import { invoke } from "@tauri-apps/api/core"
 import { setTaskList, addTask } from "@/store/task"
 
 export default function Home() {
-  const inpRef = React.useRef("")
+  const inpValRef = React.useRef("")
+  const inpRef = React.createRef<HTMLInputElement>()
 
   async function addTaskToDb() {
-    await invoke("add_task", { task: { name: inpRef.current, status: 1 } })
-    dispatch(addTask({ name: inpRef.current, status: 1 }))
+    await invoke("add_task", { task: { name: inpValRef.current, status: 1 } })
+    dispatch(addTask({ name: inpValRef.current, status: 1 }))
+
+    const inp = inpRef.current
+    if (inp) inp.value = ""
+    inpValRef.current = ""
   }
 
   const dispatch = useDispatch()
@@ -35,7 +40,8 @@ export default function Home() {
     <main className="flex h-screen overflow-hidden flex-col items-center space-y-2 p-4 pt-0
             box-border">
       <div className="flex w-full items-center space-x-2 pb-2 pt-4 bg-white flex-grow-0">
-        <Input placeholder="Task name" onChange={e => inpRef.current = e.target.value} />
+        <Input placeholder="Task name" onChange={e => inpValRef.current = e.target.value}
+          ref={inpRef} />
         <Button type="submit" onClick={addTaskToDb}>Add</Button>
       </div>
       <ScrollArea className="w-full flex-grow">
