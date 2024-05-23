@@ -48,8 +48,9 @@ repos:
         language: node
         files: \.ts$|\.js$
 
-      - id: lint-staged
+      - id: Lint TS
         name: Front-end lint staged
         description: Lint front-end code to be commit
         entry: bash -c 'pnpm lint-staged -v'
         language: node
+        files: \.ts$|\.js$|\.tsx$|\.jsx$
