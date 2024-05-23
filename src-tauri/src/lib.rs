@@ -1,6 +1,6 @@
 #![allow(unexpected_cfgs)]
 
-use std::{error, ops::Add, sync::Mutex};
+use std::{error, fs, ops::Add, sync::Mutex};
 
 use serde::{Deserialize, Serialize};
 use sqlx::{migrate::MigrateDatabase, Pool, Sqlite};
@@ -91,13 +91,17 @@ async fn get_task_list() -> Result<Vec<Task>, Box<dyn error::Error>> {
 pub async fn run() {
   tauri::Builder::default()
     .setup(|app| {
-      let app_cache_dir = app.path().app_cache_dir().unwrap();
-      let app_cache_dir = app_cache_dir.to_str().unwrap();
-      let app_cache_dir = String::from("sqlite:").add(app_cache_dir).add("/cache.db");
+      let app_data_dir = app.path().app_data_dir().unwrap();
+      let app_data_dir = app_data_dir.to_str().unwrap();
 
-      println!("DB_URL ==>> {}", app_cache_dir);
+      // create a app-data directory if not exists
+      if let Err(error) = fs::create_dir_all(app_data_dir) {
+        println!("create_dir_all error {}", error);
+      }
 
-      *DB_URL.lock().unwrap() = app_cache_dir;
+      let app_data_dir = String::from("sqlite:").add(app_data_dir).add("/cache.db");
+
+      *DB_URL.lock().unwrap() = app_data_dir;
 
       Ok(())
     })
