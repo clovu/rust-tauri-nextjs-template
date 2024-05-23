@@ -31,13 +31,16 @@ export default function Home() {
     loadTaskList()
   }, [])
 
-  return <ScrollArea>
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="flex w-full max-w-sm items-center space-x-2">
+  return (
+    <main className="flex h-screen overflow-hidden flex-col items-center space-y-2 p-4 pt-0
+            box-border">
+      <div className="flex w-full items-center space-x-2 pb-2 pt-4 bg-white flex-grow-0">
         <Input placeholder="Task name" onChange={e => inpRef.current = e.target.value} />
         <Button type="submit" onClick={addTaskToDb}>Add</Button>
       </div>
-      <TaskList />
+      <ScrollArea className="w-full flex-grow">
+        <TaskList />
+      </ScrollArea>
     </main>
-  </ScrollArea>
+  )
 }

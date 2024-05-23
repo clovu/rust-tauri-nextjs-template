@@ -6,8 +6,7 @@ import { TaskType } from "./type"
 
 export function Task(props: TaskType) {
   return (
-    <Card className="flex w-full max-w-sm items-center space-x-2">
-      {/* <Button onClick={() => setTaskList(Date.now().toString())}> set </Button> */}
+    <Card className="flex w-full mb-2">
       <CardHeader className="p-3 justify-between flex w-full flex-row items-center">
         <p>{props.name}</p>
 
