@@ -54,6 +54,7 @@ export default [
           requireLast: false,
         },
       }],
+      "react/prop-types": "off",
       "space-in-parens": ["error", "never"],
       "quote-props": ["error", "as-needed"],
       "padding-line-between-statements": [
