@@ -1,9 +1,13 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 
+export enum TaskStatus {
+  Todo, Done, Cancel, Trash
+}
+
 export interface Task {
   id: number
   name: string
-  status: number
+  status: TaskStatus
 }
 
 const taskSlice = createSlice({
@@ -19,9 +23,27 @@ const taskSlice = createSlice({
     setTaskList(state, action: PayloadAction<Task[]>) {
       state.list = action.payload
     },
+    removeTaskById(state, action: PayloadAction<number>) {
+      const taskIndex = state.list.findIndex(task => task.id === action.payload)
+      if (taskIndex < 0) return
+
+      state.list.splice(taskIndex, 1)
+    },
+    updateTask(state, action: PayloadAction<Partial<Omit<Task, "id">> & { id: number }>) {
+      const taskIndex = state.list.findIndex(task => task.id === action.payload.id)
+      if (taskIndex < 0) return
+
+      const task = state.list[taskIndex]
+
+      state.list[taskIndex] = {
+        ...task,
+        name: action.payload.name ?? task.name,
+        status: action.payload.status ?? task.status,
+      }
+    },
   },
 })
 
-export const { addTask, setTaskList } = taskSlice.actions
+export const { addTask, setTaskList, removeTaskById, updateTask } = taskSlice.actions
 
 export default taskSlice.reducer

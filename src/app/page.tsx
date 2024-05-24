@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux"
 import { TaskList } from "@/components/task-list"
 import { Button, Input } from "@/components/ui"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { Task } from "@/store/task"
+import { Task, TaskStatus } from "@/store/task"
 import { invoke } from "@tauri-apps/api/core"
 import { setTaskList, addTask } from "@/store/task"
 
@@ -15,8 +15,8 @@ export default function Home() {
   const inpRef = React.createRef<HTMLInputElement>()
 
   async function addTaskToDb() {
-    await invoke("add_task", { task: { name: inpValRef.current, status: 1 } })
-    dispatch(addTask({ name: inpValRef.current, status: 1 }))
+    await invoke("add_task", { task: { name: inpValRef.current, status: TaskStatus.Todo } })
+    dispatch(addTask({ name: inpValRef.current, status: TaskStatus.Todo }))
 
     const inp = inpRef.current
     if (inp) inp.value = ""

@@ -48,6 +48,49 @@ async fn add_task(task: AddTask) -> Result<(), String> {
   }
 }
 
+#[derive(Deserialize)]
+struct UpdateTask {
+  id: i32,
+  name: Option<String>,
+  status: Option<i32>,
+}
+
+#[tauri::command]
+async fn set_task_by_id(task: UpdateTask) -> Result<(), String> {
+  let task_raw = update_task_by_id(task.id, task.status, task.name).await;
+
+  match task_raw {
+    Ok(_) => Ok(()),
+    Err(err) => Err(format!("{}", err).to_string()),
+  }
+}
+
+async fn update_task_by_id(
+  id: i32,
+  status: Option<i32>,
+  name: Option<String>,
+) -> Result<(), Box<dyn error::Error>> {
+  let db = create_db().await;
+  let db = db.unwrap();
+
+  let task_raw: Task = sqlx::query_as(format!("select * from task where id = {}", id).as_str())
+    .fetch_one(&db)
+    .await?;
+
+  let sql = format!(
+    "update task set status = {} , name = '{}' where id = {}",
+    status.unwrap_or(task_raw.status),
+    name.unwrap_or(task_raw.name),
+    id
+  );
+
+  println!("update sql = {}", sql);
+
+  sqlx::query(sql.as_str()).execute(&db).await?;
+
+  Ok(())
+}
+
 async fn add_task_to_db(name: String, status: i32) -> Result<(), Box<dyn error::Error>> {
   let db = create_db().await?;
 
@@ -106,7 +149,11 @@ pub async fn run() {
       Ok(())
     })
     .plugin(tauri_plugin_shell::init())
-    .invoke_handler(tauri::generate_handler![get_tasks, add_task])
+    .invoke_handler(tauri::generate_handler![
+      get_tasks,
+      add_task,
+      set_task_by_id
+    ])
     .run(tauri::generate_context!())
     .expect("error while running tauri application");
 }
