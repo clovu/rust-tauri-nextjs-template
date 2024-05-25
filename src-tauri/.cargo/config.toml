@@ -2,3 +2,11 @@
 target = "x86_64-apple-darwin"
 
 [target]
+
+[target.x86_64-pc-windows-msvc]
+linker = "lld"
+rustflags = [
+  "-Lnative=/Users/clover/.xwin/crt/lib/x86_64",
+  "-Lnative=/Users/clover/.xwin/sdk/lib/um/x86_64",
+  "-Lnative=/Users/clover/.xwin/sdk/lib/ucrt/x86_64"
+]
