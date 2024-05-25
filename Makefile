@@ -21,4 +21,10 @@ build:
 	@make node_modules
 	@pnpm tauri build
 
+clean:
+	@rm -rf .next && echo "remove .next of next build"
+	@rm -rf node_modules && echo "remove nodejs packages"
+	@rm -rf out && echo "remove out of next build"
+	@cargo clean --manifest-path src-tauri/Cargo.toml
+
 .PHONY: install-rust run
