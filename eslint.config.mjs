@@ -47,7 +47,10 @@ export default [
         named: 'never',
         asyncArrow: 'always',
       }],
+
       '@typescript-eslint/consistent-type-definitions': 'error',
+      '@typescript-eslint/no-empty-object-type': 'off',
+
       'react/prop-types': 'off',
       'space-in-parens': ['error', 'never'],
       'quote-props': ['error', 'as-needed'],
