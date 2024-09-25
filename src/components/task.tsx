@@ -36,7 +36,7 @@ export function Task(props: TaskProps) {
             <Cross2Icon height={16} width={16} />
           </Button>
           <Popover>
-            <PopoverTrigger>
+            <PopoverTrigger asChild>
               <Button size={'sm'} variant="ghost" className="w-9 h-9 p-0">
                 <TrashIcon color="red" height={16} width={16} />
               </Button>
