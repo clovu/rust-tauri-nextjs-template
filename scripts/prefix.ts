@@ -1,6 +1,6 @@
 import { internalIpV4 } from 'internal-ip'
 
-const IsProd = process.env.NODE_ENV === "production"
+const IsProd = process.env.NODE_ENV === 'production'
 
 export async function getAssetPrefix() {
   let internalHost: string = '127.0.0.1'

@@ -1,7 +1,7 @@
-import { configureStore } from "@reduxjs/toolkit"
-import { useSelector as useStore } from "react-redux"
+import { configureStore } from '@reduxjs/toolkit'
+import { useSelector as useStore } from 'react-redux'
 
-import task from "./task"
+import task from './task'
 
 const store = configureStore({
   reducer: { task },

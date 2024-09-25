@@ -1,32 +1,32 @@
-"use client"
+'use client'
 
-import React from "react"
-import { useDispatch } from "react-redux"
+import React from 'react'
+import { useDispatch } from 'react-redux'
 
-import { TaskList } from "@/components/task-list"
-import { Button, Input } from "@/components/ui"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { Task, TaskStatus } from "@/store/task"
-import { invoke } from "@tauri-apps/api/core"
-import { setTaskList, addTask } from "@/store/task"
+import { TaskList } from '@/components/task-list'
+import { Button, Input } from '@/components/ui'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import { Task, TaskStatus } from '@/store/task'
+import { invoke } from '@tauri-apps/api/core'
+import { setTaskList, addTask } from '@/store/task'
 
 export default function Home() {
-  const inpValRef = React.useRef("")
+  const inpValRef = React.useRef('')
   const inpRef = React.createRef<HTMLInputElement>()
 
   async function addTaskToDb() {
-    await invoke("add_task", { task: { name: inpValRef.current, status: TaskStatus.Todo } })
+    await invoke('add_task', { task: { name: inpValRef.current, status: TaskStatus.Todo } })
     dispatch(addTask({ name: inpValRef.current, status: TaskStatus.Todo }))
 
     const inp = inpRef.current
-    if (inp) inp.value = ""
-    inpValRef.current = ""
+    if (inp) inp.value = ''
+    inpValRef.current = ''
   }
 
   const dispatch = useDispatch()
 
   async function loadTaskList() {
-    const tasks = await invoke<Task[]>("get_tasks")
+    const tasks = await invoke<Task[]>('get_tasks')
     dispatch(setTaskList(tasks))
   }
 

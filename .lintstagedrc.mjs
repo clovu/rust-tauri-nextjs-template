@@ -1,4 +1,4 @@
-import path from "node:path"
+import path from 'node:path'
 
 function createCommand(prefix, join) {
   return (filenames) =>
@@ -6,8 +6,8 @@ function createCommand(prefix, join) {
 }
 
 export default {
-  "*.{js,jsx,ts,tsx}": [
-    createCommand("pnpm eslint --fix", ""),
+  '*.{js,jsx,ts,tsx}': [
+    createCommand('pnpm eslint --fix', ''),
     // unlock the code to enable prettier format if you use it
     // createCommand('prettier --write', '--write')
   ],

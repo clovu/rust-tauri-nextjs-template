@@ -1,11 +1,11 @@
-"use client"
-import React from "react"
+'use client'
+import React from 'react'
 
-import { Task as TaskItem } from "./task"
-import { useSelector } from "@/store"
-import { TaskStatus, updateTask } from "@/store/task"
-import { useDispatch } from "react-redux"
-import { invoke } from "@tauri-apps/api/core"
+import { Task as TaskItem } from './task'
+import { useSelector } from '@/store'
+import { TaskStatus, updateTask } from '@/store/task'
+import { useDispatch } from 'react-redux'
+import { invoke } from '@tauri-apps/api/core'
 
 
 export function TaskList() {
@@ -13,7 +13,7 @@ export function TaskList() {
   const dispatch = useDispatch()
 
   async function changeState(id: number, status: TaskStatus) {
-    await invoke("set_task_by_id", { task: { id, status } })
+    await invoke('set_task_by_id', { task: { id, status } })
     dispatch(updateTask({ id, status }))
   }
 
