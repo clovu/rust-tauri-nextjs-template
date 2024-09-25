@@ -42,7 +42,7 @@ export function Task(props: TaskProps) {
               </Button>
             </PopoverTrigger>
             <PopoverContent>
-              <p>Are you sure you want to delete it?</p>
+              <p className="text-secondary-foreground">Are you sure you want to delete it?</p>
               <div className="flex">
                 <div className="flex-grow"></div>
                 <Button size={'sm'} variant="ghost" onClick={props.onMoveToTrash}>DEL</Button>
