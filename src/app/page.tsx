@@ -9,6 +9,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { Task, TaskStatus } from '@/store/task'
 import { invoke } from '@tauri-apps/api/core'
 import { setTaskList, addTask } from '@/store/task'
+import { WinDisplayController } from '@/components/win-display-controller'
 
 export default function Home() {
   const inpValRef = React.useRef('')
@@ -55,6 +56,8 @@ export default function Home() {
       <ScrollArea className="w-full flex-grow px-4 pb-4">
         <TaskList />
       </ScrollArea>
+
+      <WinDisplayController />
     </main>
   )
 }

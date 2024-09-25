@@ -26,7 +26,7 @@ export default [
   },
 
   {
-    ignores: ['.next/', 'src-tauri/'],
+    ignores: ['.next/', 'src-tauri/', 'out'],
   },
 
   {
