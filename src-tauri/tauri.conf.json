@@ -11,9 +11,11 @@
   "app": {
     "windows": [
       {
-        "title": " ",
         "width": 400,
-        "height": 600
+        "hiddenTitle": true,
+        "titleBarStyle": "Overlay",
+        "height": 600,
+        "visible": false
       }
     ],
     "security": {
