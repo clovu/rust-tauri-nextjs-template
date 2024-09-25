@@ -41,6 +41,9 @@ importers:
       next:
         specifier: 15.0.0-canary.167
         version: 15.0.0-canary.167(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522)
+      next-theme:
+        specifier: ^0.1.5
+        version: 0.1.5(next@15.0.0-canary.167(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522))(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522)
       react:
         specifier: 19.0.0-rc-f994737d14-20240522
         version: 19.0.0-rc-f994737d14-20240522
@@ -459,7 +462,6 @@ packages:
   '@next/swc-darwin-x64@15.0.0-canary.166':
     resolution: {integrity: sha512-aKN81if9rAcdWDJdIuHFeElQlSIIK8FI0hCBrew/x3+59aHuRO2COVPYlQ5+KBHZRQxZTOrdTBFOhkywe44BCA==}
     engines: {node: '>= 10'}
-    cpu: [x64]
     os: [darwin]
 
   '@nodelib/fs.scandir@2.1.5':
@@ -1880,6 +1882,14 @@ packages:
 
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
+
+  next-theme@0.1.5:
+    resolution: {integrity: sha512-WR8UCLEFjWvRl+UO2lTM4pGo7R4jzGZqQ6YL3hiL1Ns587Qb91GhJZLPu/Aa4ExtGQ/5wlcDX8zDYZoCN9oDPw==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+    peerDependencies:
+      next: '*'
+      react: '*'
+      react-dom: '*'
 
   next@15.0.0-canary.167:
     resolution: {integrity: sha512-IifSWU8gNQ8kTXRf2QnEGvUUpnkZk8WKLKWX6rypnEDDmn38sXaWpemjMUIM98UrT/y9sXBIiBA84X2MvignIA==}
@@ -4411,6 +4421,12 @@ snapshots:
   nanoid@3.3.7: {}
 
   natural-compare@1.4.0: {}
+
+  next-theme@0.1.5(next@15.0.0-canary.167(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522))(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522):
+    dependencies:
+      next: 15.0.0-canary.167(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522)
+      react: 19.0.0-rc-f994737d14-20240522
+      react-dom: 19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522)
 
   next@15.0.0-canary.167(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522):
     dependencies:

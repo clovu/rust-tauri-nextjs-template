@@ -37,13 +37,20 @@ export default function Home() {
   return (
     <main className="flex h-screen overflow-hidden flex-col items-center pt-0 box-border">
       <nav data-tauri-drag-region className="h-6 w-full p-4 pb-0"></nav>
-      <div data-tauri-drag-region className="flex w-full items-center space-x-2 bg-white flex-grow-0 p-4 pb-0 mb-4">
+      <div data-tauri-drag-region className="flex w-full items-center space-x-2 flex-grow-0 p-4 pb-0 mb-4">
         <Input
           placeholder="Task name"
+          className="placeholder:text-muted-foreground text-secondary-foreground"
           onChange={e => inpValRef.current = e.target.value}
           ref={inpRef}
         />
-        <Button type="submit" onClick={addTaskToDb}>Add</Button>
+        <Button
+          className="bg-transparent hover:bg-white/5 !border-border border text-muted-foreground hover:text-secondary-foreground"
+          type="submit"
+          onClick={addTaskToDb}
+        >
+          Add
+        </Button>
       </div>
       <ScrollArea className="w-full flex-grow px-4 pb-4">
         <TaskList />

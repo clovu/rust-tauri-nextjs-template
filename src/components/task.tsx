@@ -26,7 +26,7 @@ export function Task(props: TaskProps) {
   return (
     <Card className={`flex w-full mb-2 ${statusClass}`}>
       <CardHeader className="p-3 justify-between flex w-full flex-row items-center">
-        <p>{props.name}</p>
+        <p className="text-secondary-foreground">{props.name}</p>
 
         <div>
           <Button variant="ghost" className="w-9 h-9 p-0" onClick={props.onDone}>
