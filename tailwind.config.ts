@@ -90,7 +90,7 @@ const config = {
       },
     },
   },
-  plugins: [twdAnimate, require('tailwindcss-animate')],
+  plugins: [twdAnimate],
 } satisfies Config
 
 export default config
