@@ -15,7 +15,7 @@ new Window('main', { visible: false })
  */
 export function WinDisplayController() {
   useEffect(() => {
-    setTimeout(getCurrent().show)
+    setTimeout(getCurrent().show, 100)
   }, [])
 
   return undefined

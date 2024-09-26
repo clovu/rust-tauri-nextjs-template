@@ -1,63 +1,86 @@
 'use client'
 
-import React from 'react'
-import { useDispatch } from 'react-redux'
+import React, { createRef, useState } from 'react'
+import Link from 'next/link'
 
-import { TaskList } from '@/components/task-list'
-import { Button, Input } from '@/components/ui'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { Task, TaskStatus } from '@/store/task'
-import { invoke } from '@tauri-apps/api/core'
-import { setTaskList, addTask } from '@/store/task'
 import { WinDisplayController } from '@/components/win-display-controller'
+import { Header } from '@/components/header'
+import { cn } from '@/lib/utils'
+import { buttonVariants } from '@/components/ui/button'
+import { Allotment, AllotmentHandle } from 'allotment'
+
+import 'allotment/dist/style.css'
+
+let firstLoad = true
 
 export default function Home() {
-  const inpValRef = React.useRef('')
-  const inpRef = React.createRef<HTMLInputElement>()
+  const [isCollapsed, setCollapsed] = useState(false)
+  const paneRef = createRef<AllotmentHandle>()
 
-  async function addTaskToDb() {
-    await invoke('add_task', { task: { name: inpValRef.current, status: TaskStatus.Todo } })
-    dispatch(addTask({ name: inpValRef.current, status: TaskStatus.Todo }))
+  return <>
+    <main className="flex h-screen">
+      <Allotment
+        snap
+        defaultSizes={[180]}
+        ref={paneRef}
+        onChange={([first]) => {
+          if (firstLoad) {
+            firstLoad = false
+            return
+          }
 
-    const inp = inpRef.current
-    if (inp) inp.value = ''
-    inpValRef.current = ''
-  }
-
-  const dispatch = useDispatch()
-
-  async function loadTaskList() {
-    const tasks = await invoke<Task[]>('get_tasks')
-    dispatch(setTaskList(tasks))
-  }
-
-  React.useEffect(() => {
-    loadTaskList()
-  }, [])
-
-  return (
-    <main className="flex h-screen overflow-hidden flex-col items-center pt-0 box-border">
-      <nav data-tauri-drag-region className="h-6 w-full p-4 pb-0"></nav>
-      <div data-tauri-drag-region className="flex w-full items-center space-x-2 flex-grow-0 p-4 pb-0 mb-4">
-        <Input
-          placeholder="Task name"
-          className="placeholder:text-muted-foreground text-secondary-foreground"
-          onChange={e => inpValRef.current = e.target.value}
-          ref={inpRef}
-        />
-        <Button
-          className="bg-transparent hover:bg-white/5 !border-border border text-muted-foreground hover:text-secondary-foreground"
-          type="submit"
-          onClick={addTaskToDb}
-        >
-          Add
-        </Button>
-      </div>
-      <ScrollArea className="w-full flex-grow px-4 pb-4">
-        <TaskList />
-      </ScrollArea>
-
-      <WinDisplayController />
-    </main>
-  )
+          if (isCollapsed && first)
+            setCollapsed(false)
+          else if (!isCollapsed && !first)
+            setCollapsed(true)
+        }}
+      >
+        <Allotment.Pane minSize={180} preferredSize={180} snap visible={!isCollapsed}>
+          <div className="w-full min-w-[160px]">
+            <div className="h-head w-full" data-tauri-drag-region></div>
+            <div className="w-full grid gap-1 px-2 ">
+              <Link href="#" className={cn(
+                buttonVariants({ variant: 'ghost', size: 'sm' }),
+                'justify-start',
+              )}>
+                Java
+              </Link>
+              <Link href="#" className={cn(
+                buttonVariants({ variant: 'ghost', size: 'sm' }),
+                'dark:bg-muted dark:text-white dark:hover:bg-muted dark:hover:text-white',
+                'justify-start',
+              )}>
+                Rust
+              </Link>
+              <Link href="#" className={cn(
+                buttonVariants({ variant: 'ghost', size: 'sm' }),
+                'justify-start',
+              )}>
+                Golang
+              </Link>
+              <Link href="#" className={cn(
+                buttonVariants({ variant: 'ghost', size: 'sm' }),
+                'justify-start',
+              )}>
+                C++
+              </Link>
+            </div>
+          </div>
+        </Allotment.Pane>
+        <Allotment.Pane minSize={300} className={cn('flex-grow flex flex-col')}>
+          <Header
+            className="w-full flex-shrink"
+            collapsed={isCollapsed}
+            onChangeSide={() => {
+              setCollapsed(!isCollapsed)
+            }}
+          />
+          <div className="flex flex-grow w-full justify-center items-center">
+            <p className="text-xs text-secondary-foreground whitespace-pre-wrap">Select an item</p>
+          </div>
+        </Allotment.Pane>
+      </Allotment>
+    </main >
+    <WinDisplayController />
+  </>
 }

@@ -6,4 +6,6 @@ export type { InputProps } from './input'
 
 export * from './card'
 
+export * from './resizable'
+
 export { Popover, PopoverContent, PopoverTrigger } from './popover'

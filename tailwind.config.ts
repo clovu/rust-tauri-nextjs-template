@@ -1,5 +1,6 @@
 import type { Config } from 'tailwindcss'
 import twdAnimate from 'tailwindcss-animate'
+import { addDynamicIconSelectors } from '@iconify/tailwind'
 
 const config = {
   darkMode: ['class'],
@@ -19,6 +20,15 @@ const config = {
       },
     },
     extend: {
+      margin: {
+        space: 'var(--space)',
+      },
+      padding: {
+        space: 'var(--space)',
+      },
+      height: {
+        head: 'var(--header-height)',
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
@@ -90,7 +100,7 @@ const config = {
       },
     },
   },
-  plugins: [twdAnimate],
+  plugins: [twdAnimate, addDynamicIconSelectors()],
 } satisfies Config
 
 export default config
