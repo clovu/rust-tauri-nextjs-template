@@ -5,10 +5,10 @@ function contextmenuEventHandler(e: MouseEvent) {
 }
 
 export function useFeignDesktop() {
-  if (process.env.NODE_ENV !== 'production')
-    return
-
   useEffect(() => {
+    if (process.env.NODE_ENV !== 'production')
+      return
+
     if (!window) return
 
     window.addEventListener('contextmenu', contextmenuEventHandler)

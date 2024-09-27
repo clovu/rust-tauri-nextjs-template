@@ -11,7 +11,7 @@ interface HeaderProps {
 export function Header({ className, collapsed, onChangeSide }: HeaderProps) {
   return <>
     <div style={{ width: '100%', height: 0 }}></div>
-    <nav
+    <header
       data-tauri-drag-region
       className={cn('h-head box-border flex items-center border-b-border border-b', className)}
     >
@@ -33,7 +33,6 @@ export function Header({ className, collapsed, onChangeSide }: HeaderProps) {
       <div className="pl-space">
         <h1 data-tauri-drag-region className="text-accent-foreground">Rust</h1>
       </div>
-
-    </nav>
+    </header>
   </>
 }

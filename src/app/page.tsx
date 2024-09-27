@@ -1,21 +1,26 @@
 'use client'
 
 import React, { createRef, useState } from 'react'
-import Link from 'next/link'
+import { Allotment, AllotmentHandle } from 'allotment'
+import 'allotment/dist/style.css'
+
+import { cn } from '@/lib/utils'
 
 import { WinDisplayController } from '@/components/win-display-controller'
 import { Header } from '@/components/header'
-import { cn } from '@/lib/utils'
-import { buttonVariants } from '@/components/ui/button'
-import { Allotment, AllotmentHandle } from 'allotment'
-
-import 'allotment/dist/style.css'
+import { Nav, NavLink } from '@/components/nav'
 
 let firstLoad = true
 
 export default function Home() {
   const [isCollapsed, setCollapsed] = useState(false)
   const paneRef = createRef<AllotmentHandle>()
+  const [items] = useState<NavLink[]>([
+    { title: 'Java', variant: 'ghost' },
+    { title: 'Rust', variant: 'default', label: '99' },
+    { title: 'TypeScript', variant: 'ghost' },
+    { title: 'Golang', variant: 'ghost' },
+  ])
 
   return <>
     <main className="flex h-screen">
@@ -36,36 +41,8 @@ export default function Home() {
         }}
       >
         <Allotment.Pane minSize={180} preferredSize={180} snap visible={!isCollapsed}>
-          <div className="w-full min-w-[160px]">
-            <div className="h-head w-full" data-tauri-drag-region></div>
-            <div className="w-full grid gap-1 px-2 ">
-              <Link href="#" className={cn(
-                buttonVariants({ variant: 'ghost', size: 'sm' }),
-                'justify-start',
-              )}>
-                Java
-              </Link>
-              <Link href="#" className={cn(
-                buttonVariants({ variant: 'ghost', size: 'sm' }),
-                'dark:bg-muted dark:text-white dark:hover:bg-muted dark:hover:text-white',
-                'justify-start',
-              )}>
-                Rust
-              </Link>
-              <Link href="#" className={cn(
-                buttonVariants({ variant: 'ghost', size: 'sm' }),
-                'justify-start',
-              )}>
-                Golang
-              </Link>
-              <Link href="#" className={cn(
-                buttonVariants({ variant: 'ghost', size: 'sm' }),
-                'justify-start',
-              )}>
-                C++
-              </Link>
-            </div>
-          </div>
+          <div className="h-head w-full" data-tauri-drag-region></div>
+          <Nav links={items} />
         </Allotment.Pane>
         <Allotment.Pane minSize={300} className={cn('flex-grow flex flex-col')}>
           <Header
