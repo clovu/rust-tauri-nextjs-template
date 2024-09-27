@@ -1,5 +1,5 @@
 'use client'
-import { getName } from '@tauri-apps/api/app'
+
 import { useAtomValue } from 'jotai'
 import { Button } from './ui'
 import { cn } from '@/lib/utils'
@@ -15,7 +15,7 @@ interface HeaderProps {
 
 export function Header({ className, transition, collapsed, onChangeSide, onTransitionEnd }: HeaderProps) {
   const active = useAtomValue(activeAtom)
-  const title = active?.title ?? getName()
+  const title = active?.title ?? ''
 
   return <>
     <div style={{ width: '100%', height: 0 }}></div>
