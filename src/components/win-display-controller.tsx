@@ -1,9 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-import { getCurrent, Window } from '@tauri-apps/api/window'
-
-new Window('main', { visible: false })
+import { getCurrent } from '@tauri-apps/api/window'
 
 /**
  * Fix tauri window startup white screen.
