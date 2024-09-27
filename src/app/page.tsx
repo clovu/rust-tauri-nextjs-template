@@ -40,12 +40,17 @@ export default function Home() {
           else if (!isCollapsed && !first)
             setCollapsed(true)
         }}
+        separator={false}
+        proportionalLayout
       >
         <Allotment.Pane minSize={180} preferredSize={180} snap visible={!isCollapsed}>
           <div className="h-head w-full" data-tauri-drag-region></div>
           <Nav links={items} />
         </Allotment.Pane>
-        <Allotment.Pane minSize={300} className={cn('flex-grow flex flex-col', trs && 'duration-150')} >
+        <Allotment.Pane
+          minSize={300}
+          className={cn('flex-grow flex flex-col border-l border-l-border', trs && 'duration-150')}
+        >
           <Header
             className="w-full flex-shrink"
             collapsed={isCollapsed}
