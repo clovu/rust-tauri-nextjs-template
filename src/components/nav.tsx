@@ -30,10 +30,7 @@ function LinkInput({ show, hide }: { show?: boolean, hide?: HideInput }) {
     return (
       <Link href="#">
         <Input
-          className={cn(
-            'py-0 border-none !outline-none',
-            buttonVariants({ variant: 'ghost', size: 'sm' }),
-          )}
+          className={buttonVariants({ variant: 'ghost', size: 'sm' })}
           autoFocus
           onBlur={hide}
         />
@@ -48,7 +45,7 @@ export function Nav({ links, onClick, showInput, hideInput, className }: NavProp
   return (
     <nav className={cn('w-full min-w-[160px]', className)}>
       <ScrollArea className="h-full">
-        <div className="w-full grid gap-1 px-2  overflow-auto">
+        <div className="w-full grid gap-1 px-2 py-1  overflow-auto">
           <LinkInput show={showInput} hide={hideInput} />
           {links.map((link) => (
             <Link
