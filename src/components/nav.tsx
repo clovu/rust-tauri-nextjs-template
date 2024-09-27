@@ -5,39 +5,41 @@ import { buttonVariants } from '@/components/ui/button'
 
 import { cn } from '@/lib/utils'
 
-type Variant = 'default' | 'ghost'
-
 export interface NavLink {
   title: string
+  id: string | number
   label?: string
-  variant: Variant
 }
 
 interface NavProps {
   links: NavLink[]
+  activeKey?: string | number
+  onClick?: (link: NavLink) => void
 }
 
-export function Nav({ links }: NavProps) {
+export function Nav({ links, onClick, activeKey }: NavProps) {
   return (
     <nav className="w-full min-w-[160px]">
       <div className="w-full grid gap-1 px-2 ">
-        {links.map((link, index) => (
+        {links.map((link) => (
           <Link
-            key={index}
+            key={link.id}
             draggable="false"
             href="#"
             className={cn(
-              buttonVariants({ variant: 'ghost', size: 'sm' }),
-              link.variant === 'default' && 'dark:bg-muted dark:text-white dark:hover:bg-muted dark:hover:text-white',
+              buttonVariants({ variant: link.id === activeKey ? 'default' : 'ghost', size: 'sm' }),
+              link.id === activeKey &&
+              'dark:bg-muted dark:text-white dark:hover:bg-muted dark:hover:text-white',
               'justify-start',
             )}
+            onClick={() => onClick?.(link)}
           >
             {link.title}
             {link.label && (
               <span
                 className={cn(
                   'ml-auto',
-                  link.variant === 'default' &&
+                  link.id === activeKey &&
                   'text-background dark:text-white',
                 )}
               >

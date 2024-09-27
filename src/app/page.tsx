@@ -16,12 +16,17 @@ export default function Home() {
   const [isCollapsed, setCollapsed] = useState(false)
   const paneRef = createRef<AllotmentHandle>()
   const [items] = useState<NavLink[]>([
-    { title: 'Java', variant: 'ghost' },
-    { title: 'Rust', variant: 'default', label: '99' },
-    { title: 'TypeScript', variant: 'ghost' },
-    { title: 'Golang', variant: 'ghost' },
+    { id: 'java', title: 'Java' },
+    { id: 'rust', title: 'Rust' },
+    { id: 'ts', title: 'TypeScript' },
+    { id: 'go', title: 'Golang' },
   ])
   const [trs, setTrs] = useState(false)
+  const [activeLink, setActiveLink] = useState<NavLink>(items[0])
+
+  function onNavClick(link: NavLink) {
+    setActiveLink(link)
+  }
 
   return <>
     <main className="flex h-screen">
@@ -45,7 +50,7 @@ export default function Home() {
       >
         <Allotment.Pane minSize={180} preferredSize={180} snap visible={!isCollapsed}>
           <div className="h-head w-full" data-tauri-drag-region></div>
-          <Nav links={items} />
+          <Nav links={items} onClick={onNavClick} activeKey={activeLink?.id} />
         </Allotment.Pane>
         <Allotment.Pane
           minSize={300}
