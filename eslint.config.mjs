@@ -3,6 +3,7 @@ import pluginJs from '@eslint/js'
 import tseslint from 'typescript-eslint'
 import pluginReactConfig from 'eslint-plugin-react/configs/recommended.js'
 import { fixupConfigRules } from '@eslint/compat'
+import reactCompiler from 'eslint-plugin-react-compiler'
 
 export default [
   {
@@ -12,6 +13,7 @@ export default [
         ...globals.node,
       },
     },
+    plugins: { 'react-compiler': reactCompiler },
   },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
@@ -31,6 +33,7 @@ export default [
 
   {
     rules: {
+      'react-compiler/react-compiler': 'error',
       'react/react-in-jsx-scope': 'off',
       semi: ['error', 'never'],
       quotes: ['error', 'single'],

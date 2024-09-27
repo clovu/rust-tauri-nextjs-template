@@ -13,9 +13,9 @@ const nextConfig = async () => ({
   },
   // Configure assetPrefix or else the server won't properly resolve your assets.
   assetPrefix: await getAssetPrefix(),
+  experimental: {
+    reactCompiler: true,
+  },
 } satisfies NextConfig)
 
 export default nextConfig
-
-
-
