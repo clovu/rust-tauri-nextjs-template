@@ -13,7 +13,7 @@ import { getCurrent } from '@tauri-apps/api/window'
  */
 export function WinDisplayController() {
   useEffect(() => {
-    setTimeout(getCurrent().show, 100)
+    setTimeout(getCurrent().show, 30)
   }, [])
 
   return undefined
