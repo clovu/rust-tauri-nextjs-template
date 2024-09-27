@@ -10,10 +10,13 @@ interface HeaderProps {
   collapsed?: boolean
   onChangeSide?: () => void
   onTransitionEnd?: () => void
+  onAdd?: () => void
   transition?: boolean
 }
 
-export function Header({ className, transition, collapsed, onChangeSide, onTransitionEnd }: HeaderProps) {
+export function Header(props: HeaderProps) {
+  const { className, transition, collapsed, onChangeSide, onTransitionEnd, onAdd } = props
+
   const active = useAtomValue(activeAtom)
   const title = active?.title ?? ''
 
@@ -31,7 +34,7 @@ export function Header({ className, transition, collapsed, onChangeSide, onTrans
           <span className="icon-[f7--sidebar-left] w-5 h-5 text-muted-foreground"></span>
         </Button>
 
-        <Button variant="ghost" size="icon">
+        <Button variant="ghost" size="icon" onClick={onAdd}>
           <span className="icon-[carbon--add-large] w-5 h-5 text-muted-foreground"></span>
         </Button>
       </div>

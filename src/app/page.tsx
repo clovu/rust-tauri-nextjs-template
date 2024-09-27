@@ -17,7 +17,7 @@ let firstLoad = true
 export default function Home() {
   const [isCollapsed, setCollapsed] = useState(false)
   const paneRef = createRef<AllotmentHandle>()
-  const [items] = useState<NavLink[]>([
+  const [items, setItems] = useState<NavLink[]>([
     { id: 'java', title: 'Java' },
     { id: 'rust', title: 'Rust' },
     { id: 'ts', title: 'TypeScript' },
@@ -25,9 +25,14 @@ export default function Home() {
   ])
   const setActive = useSetAtom(activeAtom)
   const [trs, setTrs] = useState(false)
+  const [addInpVisible, setAddInpVisible] = useState(false)
 
   function onNavClick(link: NavLink) {
     setActive(link)
+  }
+
+  function onAddClick() {
+    setAddInpVisible(true)
   }
 
   return <>
@@ -52,7 +57,16 @@ export default function Home() {
       >
         <Allotment.Pane minSize={180} preferredSize={180} snap visible={!isCollapsed}>
           <div className="h-head w-full" data-tauri-drag-region></div>
-          <Nav links={items} onClick={onNavClick} />
+          <Nav
+            links={items}
+            showInput={addInpVisible}
+            onClick={onNavClick}
+            hideInput={(e) => {
+              const value = e.target.value
+              setItems([{ id: value, title: value }, ...items])
+              setAddInpVisible(false)
+            }}
+          />
         </Allotment.Pane>
         <Allotment.Pane
           minSize={300}
@@ -65,6 +79,7 @@ export default function Home() {
               setCollapsed(!isCollapsed)
               setTrs(true)
             }}
+            onAdd={onAddClick}
             transition={trs}
             onTransitionEnd={() => {
               setTrs(false)
