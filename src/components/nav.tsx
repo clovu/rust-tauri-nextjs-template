@@ -4,6 +4,8 @@ import React from 'react'
 import { buttonVariants } from '@/components/ui/button'
 
 import { cn } from '@/lib/utils'
+import { activeAtom } from '@/store/language'
+import { useAtomValue } from 'jotai'
 
 export interface NavLink {
   title: string
@@ -13,11 +15,12 @@ export interface NavLink {
 
 interface NavProps {
   links: NavLink[]
-  activeKey?: string | number
   onClick?: (link: NavLink) => void
 }
 
-export function Nav({ links, onClick, activeKey }: NavProps) {
+export function Nav({ links, onClick }: NavProps) {
+  const active = useAtomValue(activeAtom)
+
   return (
     <nav className="w-full min-w-[160px]">
       <div className="w-full grid gap-1 px-2 ">
@@ -27,8 +30,8 @@ export function Nav({ links, onClick, activeKey }: NavProps) {
             draggable="false"
             href="#"
             className={cn(
-              buttonVariants({ variant: link.id === activeKey ? 'default' : 'ghost', size: 'sm' }),
-              link.id === activeKey &&
+              buttonVariants({ variant: link.id === active?.id ? 'default' : 'ghost', size: 'sm' }),
+              link.id === active?.id &&
               'dark:bg-muted dark:text-white dark:hover:bg-muted dark:hover:text-white',
               'justify-start',
             )}
@@ -39,7 +42,7 @@ export function Nav({ links, onClick, activeKey }: NavProps) {
               <span
                 className={cn(
                   'ml-auto',
-                  link.id === activeKey &&
+                  link.id === active?.id &&
                   'text-background dark:text-white',
                 )}
               >

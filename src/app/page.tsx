@@ -5,10 +5,12 @@ import { Allotment, AllotmentHandle } from 'allotment'
 import 'allotment/dist/style.css'
 
 import { cn } from '@/lib/utils'
+import { activeAtom, useLangStore } from '@/store/language'
 
 import { WinDisplayController } from '@/components/win-display-controller'
 import { Header } from '@/components/header'
 import { Nav, NavLink } from '@/components/nav'
+import { useSetAtom } from 'jotai'
 
 let firstLoad = true
 
@@ -21,11 +23,11 @@ export default function Home() {
     { id: 'ts', title: 'TypeScript' },
     { id: 'go', title: 'Golang' },
   ])
+  const setActive = useSetAtom(activeAtom)
   const [trs, setTrs] = useState(false)
-  const [activeLink, setActiveLink] = useState<NavLink>(items[0])
 
   function onNavClick(link: NavLink) {
-    setActiveLink(link)
+    setActive(link)
   }
 
   return <>
@@ -50,7 +52,7 @@ export default function Home() {
       >
         <Allotment.Pane minSize={180} preferredSize={180} snap visible={!isCollapsed}>
           <div className="h-head w-full" data-tauri-drag-region></div>
-          <Nav links={items} onClick={onNavClick} activeKey={activeLink?.id} />
+          <Nav links={items} onClick={onNavClick} />
         </Allotment.Pane>
         <Allotment.Pane
           minSize={300}
@@ -69,11 +71,20 @@ export default function Home() {
             }}
           />
           <div className="flex flex-grow w-full justify-center items-center">
-            <p className="text-xs text-secondary-foreground whitespace-pre-wrap">Select an item</p>
+            <Conter />
           </div>
         </Allotment.Pane>
       </Allotment>
     </main >
     <WinDisplayController />
   </>
+}
+
+function Conter() {
+  const [language] = useLangStore()
+  return (
+    <p className="text-xs text-secondary-foreground whitespace-pre-wrap">
+      {language ?? 'Select an item'}
+    </p>
+  )
 }

@@ -1,6 +1,9 @@
 'use client'
+import { getName } from '@tauri-apps/api/app'
+import { useAtomValue } from 'jotai'
 import { Button } from './ui'
 import { cn } from '@/lib/utils'
+import { activeAtom } from '@/store/language'
 
 interface HeaderProps {
   className?: string
@@ -11,6 +14,9 @@ interface HeaderProps {
 }
 
 export function Header({ className, transition, collapsed, onChangeSide, onTransitionEnd }: HeaderProps) {
+  const active = useAtomValue(activeAtom)
+  const title = active?.title ?? getName()
+
   return <>
     <div style={{ width: '100%', height: 0 }}></div>
     <header
@@ -31,13 +37,13 @@ export function Header({ className, transition, collapsed, onChangeSide, onTrans
       </div>
 
       <div className={cn(
-        'h-full',
+        'h-head',
         transition && 'duration-150',
         collapsed ? 'w-[calc(6rem+72px)]' : 'w-0',
       )} onTransitionEnd={onTransitionEnd} />
 
       <div className="pl-space text-nowrap text-ellipsis overflow-hidden">
-        <h1 data-tauri-drag-region className="text-accent-foreground">Rust</h1>
+        <h1 data-tauri-drag-region className="text-accent-foreground">{title}</h1>
       </div>
     </header>
   </>
