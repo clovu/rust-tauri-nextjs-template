@@ -22,6 +22,7 @@ interface NavProps {
   onClick?: (link: NavLink) => void
   showInput?: boolean
   hideInput?: HideInput
+  className?: string
 }
 
 function LinkInput({ show, hide }: { show?: boolean, hide?: HideInput }) {
@@ -41,13 +42,13 @@ function LinkInput({ show, hide }: { show?: boolean, hide?: HideInput }) {
   return undefined
 }
 
-export function Nav({ links, onClick, showInput, hideInput }: NavProps) {
+export function Nav({ links, onClick, showInput, hideInput, className }: NavProps) {
   const active = useAtomValue(activeAtom)
 
   return (
-    <nav className="w-full min-w-[160px]">
-      <ScrollArea>
-        <div className="w-full grid gap-1 px-2">
+    <nav className={cn('w-full min-w-[160px]', className)}>
+      <ScrollArea className="h-full">
+        <div className="w-full grid gap-1 px-2  overflow-auto">
           <LinkInput show={showInput} hide={hideInput} />
           {links.map((link) => (
             <Link

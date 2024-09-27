@@ -55,9 +55,16 @@ export default function Home() {
         separator={false}
         proportionalLayout
       >
-        <Allotment.Pane minSize={180} preferredSize={180} snap visible={!isCollapsed}>
-          <div className="h-head w-full" data-tauri-drag-region></div>
+        <Allotment.Pane
+          minSize={180}
+          preferredSize={180}
+          snap
+          visible={!isCollapsed}
+          className="flex flex-col"
+        >
+          <div className="h-head w-full flex-shrink-0" data-tauri-drag-region></div>
           <Nav
+            className="flex-grow overflow-hidden"
             links={items}
             showInput={addInpVisible}
             onClick={onNavClick}
