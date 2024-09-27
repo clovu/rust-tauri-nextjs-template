@@ -21,6 +21,7 @@ export default function Home() {
     { title: 'TypeScript', variant: 'ghost' },
     { title: 'Golang', variant: 'ghost' },
   ])
+  const [trs, setTrs] = useState(false)
 
   return <>
     <main className="flex h-screen">
@@ -44,12 +45,17 @@ export default function Home() {
           <div className="h-head w-full" data-tauri-drag-region></div>
           <Nav links={items} />
         </Allotment.Pane>
-        <Allotment.Pane minSize={300} className={cn('flex-grow flex flex-col')}>
+        <Allotment.Pane minSize={300} className={cn('flex-grow flex flex-col', trs && 'duration-150')} >
           <Header
             className="w-full flex-shrink"
             collapsed={isCollapsed}
             onChangeSide={() => {
               setCollapsed(!isCollapsed)
+              setTrs(true)
+            }}
+            transition={trs}
+            onTransitionEnd={() => {
+              setTrs(false)
             }}
           />
           <div className="flex flex-grow w-full justify-center items-center">

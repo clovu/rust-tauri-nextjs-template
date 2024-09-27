@@ -6,9 +6,11 @@ interface HeaderProps {
   className?: string
   collapsed?: boolean
   onChangeSide?: () => void
+  onTransitionEnd?: () => void
+  transition?: boolean
 }
 
-export function Header({ className, collapsed, onChangeSide }: HeaderProps) {
+export function Header({ className, transition, collapsed, onChangeSide, onTransitionEnd }: HeaderProps) {
   return <>
     <div style={{ width: '100%', height: 0 }}></div>
     <header
@@ -17,7 +19,7 @@ export function Header({ className, collapsed, onChangeSide }: HeaderProps) {
     >
       <div className={cn(
         'fixed',
-        't-0 left-[6rem]',
+        'left-[6rem]',
       )}>
         <Button variant="ghost" size="icon" onClick={onChangeSide}>
           <span className="icon-[f7--sidebar-left] w-5 h-5 text-muted-foreground"></span>
@@ -28,9 +30,13 @@ export function Header({ className, collapsed, onChangeSide }: HeaderProps) {
         </Button>
       </div>
 
-      <div className={cn(collapsed ? 'w-[calc(6rem+72px)]' : 'w-0')} />
+      <div className={cn(
+        'h-full',
+        transition && 'duration-150',
+        collapsed ? 'w-[calc(6rem+72px)]' : 'w-0',
+      )} onTransitionEnd={onTransitionEnd} />
 
-      <div className="pl-space">
+      <div className="pl-space text-nowrap text-ellipsis overflow-hidden">
         <h1 data-tauri-drag-region className="text-accent-foreground">Rust</h1>
       </div>
     </header>
