@@ -39,7 +39,7 @@ jobs:
       - name: Set node version to LTS
         uses: actions/setup-node@v2
         with:
-          node-version: lts/Hydrogen
+          node-version: 22
           cache: 'pnpm'
 
       - run: pnpm install
