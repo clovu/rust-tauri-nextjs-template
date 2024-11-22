@@ -2,6 +2,26 @@
   "name": "rust-tauri-nextjs-template",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
+  "keywords": [
+    "Tauri",
+    "Template",
+    "Rust",
+    "React",
+    "NextJS",
+    "Typescript"
+  ],
+  "description": "Tauri with NextJS preset template",
+  "author": "Clover You <cloveryou02@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/clover-you/rust-tauri-nextjs-template.git"
+  },
+  "homepage": "https://github.com/clover-you/rust-tauri-nextjs-template#readme",
+  "bugs": {
+    "url": "https://github.com/clover-you/rust-tauri-nextjs-template/issues"
+  },
   "scripts": {
     "dev": "next dev --turbo",
     "build": "next build",
@@ -11,6 +31,7 @@
     "tauri": "tauri",
     "preinstall": "npx only-allow pnpm",
     "test": "vitest",
+    "prepare": "husky",
     "up": "pnpm update --interactive --recursive --latest"
   },
   "engines": {
@@ -29,6 +50,7 @@
     "allotment": "^1.20.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "husky": "^9.1.7",
     "jotai": "^2.10.3",
     "lucide-react": "^0.460.0",
     "next": "15.0.3",
