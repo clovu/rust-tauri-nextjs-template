@@ -10,5 +10,16 @@ export default {
     createCommand('pnpm eslint --fix', ''),
     // unlock the code to enable prettier format if you use it
     // createCommand('prettier --write', '--write')
+    "bash -c 'pnpm test -- --run'"
   ],
+  '*.{rs}': [
+    // Format files with rustfmt.
+    'cargo fmt --manifest-path ./src-tauri/Cargo.toml -- --check',
+    // Check the package for errors.
+    "bash -c 'cargo check --manifest-path ./src-tauri/Cargo.toml --all'",
+    // Lint rust sources.
+    "bash -c 'cargo clippy --manifest-path ./src-tauri/Cargo.toml --all-targets --all-features --tests --benches -- -D warnings'",
+    // Unit test for the project.
+    "bash -c 'cargo test --manifest-path ./src-tauri/Cargo.toml --all-features'"
+  ]
 }
