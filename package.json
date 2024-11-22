@@ -1,8 +1,7 @@
 {
-  "name": "test",
+  "name": "rust-tauri-nextjs-template",
   "version": "0.1.0",
   "private": true,
-  "packageManager": "pnpm@9.11.1",
   "scripts": {
     "dev": "next dev --turbo",
     "build": "next build",
@@ -11,8 +10,13 @@
     "fix": "eslint --fix",
     "tauri": "tauri",
     "prepare": "pre-commit install",
+    "preinstall": "npx only-allow pnpm",
     "test": "vitest",
     "up": "pnpm update --interactive --recursive --latest"
+  },
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=9"
   },
   "dependencies": {
     "@iconify-json/carbon": "^1.2.4",
