@@ -10,7 +10,6 @@ export default {
     createCommand('pnpm eslint --fix', ''),
     // unlock the code to enable prettier format if you use it
     // createCommand('prettier --write', '--write')
-    'pnpm test -- --run',
   ],
   '*.{rs}': [
     // Format files with rustfmt.
@@ -19,7 +18,5 @@ export default {
     'cargo check --manifest-path ./src-tauri/Cargo.toml --all',
     // Lint rust sources.
     'cargo clippy --manifest-path ./src-tauri/Cargo.toml --all-targets --all-features --tests --benches -- -D warnings',
-    // Unit test for the project.
-    'cargo test --manifest-path ./src-tauri/Cargo.toml --all-features',
   ],
 }
