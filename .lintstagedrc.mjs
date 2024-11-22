@@ -11,7 +11,7 @@ export default {
     // unlock the code to enable prettier format if you use it
     // createCommand('prettier --write', '--write')
   ],
-  '*.{rs}': [
+  '*.rs': [
     // Format files with rustfmt.
     'cargo fmt --manifest-path ./src-tauri/Cargo.toml -- --check',
     // Check the package for errors.
