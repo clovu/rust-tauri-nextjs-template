@@ -1,12 +1,7 @@
-import { internalIpV4 } from 'internal-ip'
+const isProd = process.env.NODE_ENV === 'production'
 
-const IsProd = process.env.NODE_ENV === 'production'
+const internalHost = process.env.TAURI_DEV_HOST || 'localhost'
 
 export async function getAssetPrefix() {
-  let internalHost: string = '127.0.0.1'
-
-  if (!IsProd)
-    internalHost = await internalIpV4() ?? '127.0.0.1'
-
-  return IsProd ? undefined : `http://${internalHost}:3000`
+  return isProd ? undefined : `http://${internalHost}:3000`
 }
