@@ -62,9 +62,9 @@ export default function Home() {
           visible={!isCollapsed}
           className="flex flex-col"
         >
-          <div className="h-head w-full flex-shrink-0" data-tauri-drag-region></div>
+          <div className="h-head w-full shrink-0" data-tauri-drag-region></div>
           <Nav
-            className="flex-grow overflow-hidden"
+            className="grow overflow-hidden"
             links={items}
             showInput={addInpVisible}
             onClick={onNavClick}
@@ -77,10 +77,10 @@ export default function Home() {
         </Allotment.Pane>
         <Allotment.Pane
           minSize={300}
-          className={cn('flex-grow flex flex-col border-l border-l-border', trs && 'duration-150')}
+          className={cn('grow flex flex-col border-l border-l-border', trs && 'duration-150')}
         >
           <Header
-            className="w-full flex-shrink"
+            className="w-full shrink"
             collapsed={isCollapsed}
             onChangeSide={() => {
               setCollapsed(!isCollapsed)
@@ -92,7 +92,7 @@ export default function Home() {
               setTrs(false)
             }}
           />
-          <div className="flex flex-grow w-full justify-center items-center">
+          <div className="flex grow w-full justify-center items-center">
             <Conter />
           </div>
         </Allotment.Pane>
