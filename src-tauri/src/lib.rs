@@ -1,5 +1,6 @@
 #![allow(unexpected_cfgs)]
 
+use anyhow::{Context, Result};
 use std::{error, fs, ops::Add, sync::Mutex};
 
 use serde::{Deserialize, Serialize};
@@ -70,23 +71,24 @@ async fn update_task_by_id(
   status: Option<i32>,
   name: Option<String>,
 ) -> Result<(), Box<dyn error::Error>> {
-  let db = create_db().await;
-  let db = db.unwrap();
+  let db = create_db().await.context("failed to create db")?;
 
-  let task_raw: Task = sqlx::query_as(format!("select * from task where id = {}", id).as_str())
+  let task_raw: Task = sqlx::query_as("select * from task where id = {}")
+    .bind(id)
     .fetch_one(&db)
-    .await?;
+    .await
+    .context("failed to fetch task by id")?;
 
-  let sql = format!(
-    "update task set status = {} , name = '{}' where id = {}",
-    status.unwrap_or(task_raw.status),
-    name.unwrap_or(task_raw.name),
-    id
-  );
+  let new_status = status.unwrap_or(task_raw.status);
+  let new_name = name.unwrap_or(task_raw.name);
 
-  println!("update sql = {}", sql);
-
-  sqlx::query(sql.as_str()).execute(&db).await?;
+  sqlx::query("UPDATE task SET status = ?, name = ? WHERE id = ?")
+    .bind(new_status)
+    .bind(new_name)
+    .bind(id)
+    .execute(&db)
+    .await
+    .context("failed to update task")?;
 
   Ok(())
 }
@@ -104,17 +106,35 @@ async fn add_task_to_db(name: String, status: i32) -> Result<(), Box<dyn error::
   Ok(())
 }
 
+async fn initialize_database(url: &str) -> Result<()> {
+  if !sqlx::Sqlite::database_exists(url)
+    .await
+    .context("failed to check database existence")?
+  {
+    sqlx::Sqlite::create_database(url)
+      .await
+      .context("failed to create database")?;
+  }
+  Ok(())
+}
+
 /// create a sqlite connect
-async fn create_db() -> Result<Pool<Sqlite>, Box<dyn error::Error>> {
-  let url = DB_URL.lock().unwrap().clone();
+async fn create_db() -> Result<Pool<Sqlite>> {
+  let url = DB_URL
+    .lock()
+    .map_err(|_| anyhow::anyhow!("failed to lock db url"))?
+    .clone();
   let url = url.as_str();
 
   println!("db url: {}", url);
-  if !sqlx::Sqlite::database_exists(url).await.unwrap_or(false) {
-    sqlx::Sqlite::create_database(url).await?;
-  }
 
-  let db = sqlx::SqlitePool::connect(url).await?;
+  initialize_database(url)
+    .await
+    .context("failed to initialize database")?;
+
+  let db = sqlx::SqlitePool::connect(url)
+    .await
+    .context("failed to connect to database")?;
 
   sqlx::query(CREATE_TASK_SCRIPT).execute(&db).await?;
 
@@ -134,17 +154,21 @@ async fn get_task_list() -> Result<Vec<Task>, Box<dyn error::Error>> {
 pub async fn run() {
   tauri::Builder::default()
     .setup(|app| {
-      let app_data_dir = app.path().app_data_dir().unwrap();
-      let app_data_dir = app_data_dir.to_str().unwrap();
+      let app_data_dir = app
+        .path()
+        .app_data_dir()
+        .context("failed to get app data dir")?;
 
-      // create a app-data directory if not exists
-      if let Err(error) = fs::create_dir_all(app_data_dir) {
-        println!("create_dir_all error {}", error);
-      }
+      let app_data_dir = app_data_dir
+        .to_str()
+        .context("failed to convert app data dir")?;
+
+      // create an app-data directory if not exists
+      fs::create_dir_all(app_data_dir)?;
 
       let app_data_dir = String::from("sqlite:").add(app_data_dir).add("/cache.db");
 
-      *DB_URL.lock().unwrap() = app_data_dir;
+      *DB_URL.lock().expect("failed to lock db url mutex") = app_data_dir;
 
       Ok(())
     })
