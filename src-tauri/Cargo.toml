@@ -3,7 +3,7 @@ name = "rust-tauri-nextjs-template"
 version = "0.1.0"
 description = "A Tauri App template with NextJS"
 authors = ["Clover You"]
-edition = "2021"
+edition = "2024"
 
 [profile.release]
 opt-level = 3
