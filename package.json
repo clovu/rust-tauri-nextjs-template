@@ -16,11 +16,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/clover-you/rust-tauri-nextjs-template.git"
+    "url": "https://github.com/clovu/rust-tauri-nextjs-template.git"
   },
-  "homepage": "https://github.com/clover-you/rust-tauri-nextjs-template#readme",
+  "homepage": "https://github.com/clovu/rust-tauri-nextjs-template#readme",
   "bugs": {
-    "url": "https://github.com/clover-you/rust-tauri-nextjs-template/issues"
+    "url": "https://github.com/clovu/rust-tauri-nextjs-template/issues"
   },
   "scripts": {
     "dev": "next dev --turbo",
