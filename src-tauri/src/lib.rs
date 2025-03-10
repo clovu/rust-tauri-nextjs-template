@@ -4,7 +4,7 @@ use anyhow::{Context, Result};
 use std::{error, fs, ops::Add, sync::Mutex};
 
 use serde::{Deserialize, Serialize};
-use sqlx::{migrate::MigrateDatabase, Pool, Sqlite};
+use sqlx::{Pool, Sqlite, migrate::MigrateDatabase};
 use tauri::Manager;
 
 static DB_URL: Mutex<String> = Mutex::new(String::new());
