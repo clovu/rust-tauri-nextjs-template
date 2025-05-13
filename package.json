@@ -65,7 +65,7 @@
   "devDependencies": {
     "@eslint/compat": "^1.2.9",
     "@eslint/js": "^9.26.0",
-    "@iconify/tailwind": "^1.2.0",
+    "@iconify/tailwind4": "^1.0.6",
     "@next/swc-darwin-x64": "15.3.2",
     "@tailwindcss/postcss": "^4.1.6",
     "@tauri-apps/cli": "2.5.0",

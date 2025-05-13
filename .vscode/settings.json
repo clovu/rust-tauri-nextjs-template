@@ -74,6 +74,7 @@
   "rust-analyzer.inlayHints.typeHints.enable": false,
   "cSpell.words": [
     "cfgs",
+    "nextjs",
     "sqlx",
     "tauri"
   ],
