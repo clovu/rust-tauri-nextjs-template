@@ -1,8 +1,5 @@
 root = true
 
-[*.rs]
-indent_size = 4
-
 [*]
 indent_size = 2
 indent_style = space
@@ -12,3 +9,6 @@ insert_final_newline = true
 curly_bracket_next_line = false
 spaces_around_operators = true
 indent_brace_style=K&R
+
+[*.rs]
+indent_size = 4

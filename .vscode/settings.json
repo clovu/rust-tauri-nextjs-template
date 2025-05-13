@@ -72,4 +72,9 @@
   },
   // close inner type hints
   "rust-analyzer.inlayHints.typeHints.enable": false,
+  "cSpell.words": [
+    "cfgs",
+    "sqlx",
+    "tauri"
+  ],
 }
