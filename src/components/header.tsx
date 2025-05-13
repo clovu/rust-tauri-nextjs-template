@@ -39,7 +39,7 @@ export function Header(props: HeaderProps) {
         </Button>
       </div>
 
-      <div className={cn(
+      <div data-tauri-drag-region className={cn(
         'h-head',
         transition && 'duration-150',
         collapsed ? 'w-[calc(6rem+72px)]' : 'w-0',
