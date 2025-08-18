@@ -76,6 +76,7 @@
     "cfgs",
     "nextjs",
     "sqlx",
-    "tauri"
+    "tauri",
+    "tlsv"
   ],
 }
