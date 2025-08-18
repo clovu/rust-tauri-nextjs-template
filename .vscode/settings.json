@@ -73,8 +73,12 @@
   // close inner type hints
   "rust-analyzer.inlayHints.typeHints.enable": false,
   "cSpell.words": [
+    "cdylib",
     "cfgs",
     "nextjs",
+    "objc",
+    "rlib",
+    "serde",
     "sqlx",
     "tauri",
     "tlsv"

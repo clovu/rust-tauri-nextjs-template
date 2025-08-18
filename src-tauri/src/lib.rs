@@ -7,8 +7,10 @@ use std::{error, fs, ops::Add, sync::Mutex};
 use serde::{Deserialize, Serialize};
 use sqlx::{Pool, Sqlite, migrate::MigrateDatabase};
 use tauri::Manager;
+use utils::window::WebviewWindowExt;
 
 mod manager;
+mod utils;
 
 static DB_URL: Mutex<String> = Mutex::new(String::new());
 
@@ -174,6 +176,11 @@ pub async fn run() {
             *DB_URL.lock().expect("failed to lock db url mutex") = app_data_dir;
 
             AppHandleManager::global().init(app.app_handle().clone());
+
+            #[cfg(target_os = "macos")]
+            if let Some(window) = app.get_webview_window("main") {
+                window.to_native_window();
+            }
 
             Ok(())
         })
