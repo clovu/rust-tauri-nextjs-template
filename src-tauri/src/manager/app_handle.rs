@@ -19,13 +19,13 @@ impl AppHandleManager {
         }
     }
 
-    /// Get the app handle if it has been initialized.
-    pub fn get(&self) -> Option<AppHandle> {
-        self.0.get().cloned()
-    }
+    // /// Get the app handle if it has been initialized.
+    // pub fn get(&self) -> Option<AppHandle> {
+    //     self.0.get().cloned()
+    // }
 
-    /// Get the app handle, panics if it hasn't been initialized.
-    pub fn get_handle(&self) -> AppHandle {
-        self.get().expect("AppHandle not initialized")
-    }
+    // /// Get the app handle, panics if it hasn't been initialized.
+    // pub fn get_handle(&self) -> AppHandle {
+    //     self.get().expect("AppHandle not initialized")
+    // }
 }
