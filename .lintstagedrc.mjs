@@ -13,10 +13,10 @@ export default {
   ],
   '*.rs': [
     // Format files with rustfmt.
-    'cargo fmt --manifest-path ./src-tauri/Cargo.toml -- --check',
+    () => 'cargo fmt --manifest-path ./src-tauri/Cargo.toml -- --check',
     // Check the package for errors.
-    'cargo check --manifest-path ./src-tauri/Cargo.toml --all',
+    () => 'cargo check --manifest-path ./src-tauri/Cargo.toml --all',
     // Lint rust sources.
-    'cargo clippy --manifest-path ./src-tauri/Cargo.toml --all-targets --all-features --tests --benches -- -D warnings',
+    () => 'cargo clippy --manifest-path ./src-tauri/Cargo.toml --all-targets --all-features --tests --benches -- -D warnings',
   ],
 }
