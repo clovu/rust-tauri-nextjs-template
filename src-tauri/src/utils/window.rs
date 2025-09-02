@@ -6,7 +6,7 @@ pub trait WebviewWindowExt {
     fn to_native_window(&self);
 }
 
-impl WebviewWindowExt for WebviewWindow {
+impl<R: tauri::Runtime> WebviewWindowExt for WebviewWindow<R> {
     #[cfg(target_os = "macos")]
     fn to_native_window(&self) {
         use objc2::{MainThreadMarker, MainThreadOnly, rc::Retained};
@@ -23,12 +23,13 @@ impl WebviewWindowExt for WebviewWindow {
         };
 
         unsafe {
-            // use objc2_app_kit::NSWindowToolbarStyle;
+            if let Some(mtm) = MainThreadMarker::new() {
+                let ns_toolbar = NSToolbar::init(NSToolbar::alloc(mtm));
+                ns_window.setToolbar(Some(&ns_toolbar));
+            }
 
-            let mtm = MainThreadMarker::new_unchecked();
-            let ns_toolbar = NSToolbar::init(NSToolbar::alloc(mtm));
-            ns_window.setToolbar(Some(&ns_toolbar));
-            // ns_window.setToolbarStyle(NSWindowToolbarStyle::UnifiedCompact);
+            use objc2_app_kit::NSWindowToolbarStyle;
+            ns_window.setToolbarStyle(NSWindowToolbarStyle::Automatic);
         }
     }
 }
